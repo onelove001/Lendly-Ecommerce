@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}
+My Cart
+{% endblock %}
+
+
+{% block content %}
+<div class ="container my-5">
+    <div class = "my-5">
+        <h2> My Cart </cart>
+    </div>
+    <table class = "table table-hover">
+        <thead>
+            <tr>
+                <th scope="col" width="15%"> # </th>
+                <th scope="col"> Product Name </th>
+                <th scope="col"> Quantity </th>
+                <th scope="col" align="right"> Price </th>
+                <th scope="col"> Remove </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart %}
+            <tr>
+                <th> {{forloop.counter}} </th>
+                <td> {{item.item.name}} </td>
+                <td> 
+                    <a href = "{% url 'decrease_item' item.item.id %}" class = "mr-2"> <span class="badge bg-warning"><i class = "fa fa-minus" aria-hidden="true"> </i> </span></a>
+                        {{item.quantity}} 
+                    <a href = "{% url 'increase_item' item.item.id %}" class = "mr-2"> <span class="badge bg-success"><i class = "fa fa-plus" aria-hidden="true"> </i> </span></a>
+                </td>
+                <td align="center"> ${{item.get_total}} </td>
+                <td><a href="{% url 'remove_from_cart' item.item.id %}" class = "btn btn-danger btn-sm">❌  Clear</a> </td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <th scope = "row"> </th>
+                <td colspan="2"> Total Amount </td>
+                <td align="center">${{order.get_total_amount|floatformat:2}}</td>
+            </tr>
+
+            <tr>
+                <th scope = "row"> </th>
+                <td colspan="4" class = "text-right"> 
+                    <a href = "{% url 'home' %}" class="btn btn-warning mr-2"> Continue Shopping </a>
+                    <a href = "{% url 'payment_checkout' %}" class="btn btn-success mr-2"> Proceed to Checkout </a>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

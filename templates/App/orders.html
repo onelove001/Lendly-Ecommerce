@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %} Checkout {% endblock %}
+
+
+{% block content %}
+<div class = "container mt-5">
+    <h2 class = "class-center"> <strong> Your Successfull Orders </strong> </h2>
+    <div class = "row">
+        <div class = "col-md-12">
+            <div class = "card mt-5">
+                <div class = "table-responsive">
+                    <table class = "table">
+                        <thead>
+                            <tr>
+                                <th scope="col"> # </th>
+                                <th scope="col"> Order ID </th>
+                                <th scope="col">Products </th>
+                                <th scope="col"> Status </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for order in orders %}
+                            <tr>
+                                <th scope="row">{{forloop.counter}}</th>
+                                <td><a href="#">{{order.order_id}}</td>
+                                <td> 
+                                    {% for item in order.order_items.all %}
+                                        {{item}} <br>
+                                    {% endfor %}
+                                </td>
+                                <td> <span class = "badge bg-primary"> Processing Your Order </span> </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

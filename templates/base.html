@@ -1,0 +1,84 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel = "stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel = "stylesheet" href="{% static 'css/styles.css' %}">
+    <title> Lendly | {% block title %} {% endblock%} </title>
+    <style>
+      .card{
+        height: 350px;
+      }
+      .card-product:after{
+        content:"";
+        display: table;
+        clear:both;
+        visibility:hidden;
+      }
+      .card-product .price-new, .card-product .price{
+        margin-right: 5px;
+      }
+      .card-product .price-old{
+        color: #999;
+      }
+      .card-product .img-wrap{
+        border-radius: 3px 3px 0 0;
+        overflow: hidden;
+        height:220px;
+        text-align: center;
+      }
+      .card-product .img-wrap img{
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;
+      }
+      .card-product .info-wrap{
+        overflow: hidden;
+        padding: 15px;
+        border-top: 1px, solid #eee;
+      }
+      .card-product .info-wrap a{
+        text-decoration: None;
+      }
+      .card-product .action-wrap{
+        padding-top: 4px;
+        margin-top: 4px;
+      }
+      .card-product .bottom-wrap{
+        padding: 15px;
+        border-top: 1px solid #eee;
+      
+      }
+      .card-product .title{
+        margin-top: 0px;
+      }
+    </style>
+  </head>
+  <body>
+  {% include "navbar.html" %}
+    <div class = "container">
+      <div class = "messages container mt-2">
+        {% if messages %}
+          {% for message in messages %}
+            <div class = "alert alert-{{message.tags}}" role="alert" id="alert">
+            {{message}}
+            <button class = "close" type = "button" data-dismiss="alert" aria-level="close">
+              <span aria-hidden="True"> &times; </span>
+            </button>
+          </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    {% block content %}
+
+    {% endblock %}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>

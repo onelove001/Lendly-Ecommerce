@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Product
+{% endblock %}
+
+
+{% block content %}
+<div class = "container my-5">
+    <div class = "">
+        <div class = "row">
+            <aside class = "col-sm-5 border-right">
+                <article class = "gallery-wrap">
+                    <div class = "">
+                        <a href = "#"> <img src = "/media/{{object.image}}" alt ="image" style = "width:400px;"></a>
+                    </div>
+                </article>
+            </aside>
+            <aside class = "col-sm-7">
+                <article class = "card-body p-5">
+                    <h3 class = "title mp-3"> {{object.name.upper}} </h3>
+                    <p class = "price-detail-wrap">
+                        <span class = "price h3 text-warning"> 
+                            <span class = "currency">USD $ </span>
+                            <span class = "num"> {{object.price}} </span>
+                        </span>
+                    </p>
+                    <dl class = "item-property">
+                        <dt> Category Name</dt>
+                        <font color = "navyblue"> <b>{{object.category.title.upper}}</b></font><br><br>
+                        <dt> Short Description </dt>
+                        <dd> <p> {{object.preview_text|linebreaks}} </p> </dd>
+                    </dl>
+                    <a href = "{% url 'add_to_cart' object.id %}" class = "btn btn-lg btn-outline-primary text-uppercase">
+                        <i class = "fa fa-shopping-cart"> Add To Cart </i>
+                    </a>
+                </article>
+            </aside>
+            <dt> Main Description 
+                <dd> 
+                    <p> {{object.detailed_text|linebreaks}} </p> 
+                </dd>
+            </dt>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %} Checkout {% endblock %}
+
+
+
+{% block content %}
+<div class ="container mt-5">
+    <h3 class = "md-3"> Shipping Address > <span class = "text-muted"> Payment Checkout </span> </h3>
+    <div class = "row">
+        <div class = "col-md-8">
+            <div class = "card md-5">
+                <div class = "cad-body">
+                    <form class = "form-group" method = "POST" action ="">{% csrf_token %}
+                        {{form|crispy}}
+                        <div class ="form-group mt-3">
+                            <input type = "submit" value = "Save Address" class = "btn btn-primary">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class = "col-md-4">
+            <div class = "card">
+                <div class = "card-body">
+                    <ul class = "list-group list-group-flush">
+                    {% for order_item in order_items %}
+                        <li class = "list-group-item"> {{order_item.quantity}} x {{order_item.item.name}} </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+                <div class = "card-footer">
+                    <span><b>Total</b></span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    <span><b> ${{order_total|floatformat:2}} </b></span>
+                </div>
+            </div>
+            {% if saved_address.is_fully_filled %}
+            <a href = "{% url 'payment' %}" class = "btn btn-warning btn-md mt-3"> Make Payment </a>
+            {% else %}
+            <div class = "alert alert-info" role="alert">
+            <p> Please Fill All Fields in the Shipping Address </p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

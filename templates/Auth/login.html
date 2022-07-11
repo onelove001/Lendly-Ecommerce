@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %} Login {% endblock %}
+
+
+
+{% block content %}
+<div class = "row">
+    <div class = "col-8">
+        <h2 class = "mt-3"> Login Account </h2> <hr>
+        <form class = "form-group" method = "POST" action ="">{% csrf_token %}
+            {{form|crispy}}
+            <div class ="form-group mt-3">
+                <input type = "submit" value = "Login" class = "btn btn-primary">
+            </div>
+        </form>
+        <br>
+        <p> Don't have an account? <a href = "{% url 'signup' %}"> Create Here </a> </p>
+    </div>
+</div>
+{% endblock %}
