@@ -159,8 +159,8 @@ def payment(request):
         messages.info(request, "Please complete profile details")
         return redirect("change_profile")
 
-    STORE_ID = "abcco62cb2aa9aec48"
-    API_KEY = "abcco62cb2aa9aec48@ssl"
+    STORE_ID = ""
+    API_KEY = ""
     status_url = request.build_absolute_uri(reverse("complete_payment_success"))
     mypayment = SSLCSession(sslc_is_sandbox=True, sslc_store_id=STORE_ID, sslc_store_pass=API_KEY)
     mypayment.set_urls(success_url=status_url, fail_url=status_url, cancel_url=status_url, ipn_url=status_url)
